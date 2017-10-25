@@ -1,5 +1,7 @@
 const TrueVaultClient = require('truevault');
 
+// const tvClient = new TrueVaultClient({apiKey: 'your api key'});
+
 // async readTrueVaultDocument() {
 //     try {
 //         const response = await tvClient.readDocument(vaultId, documentId);
@@ -25,10 +27,7 @@ const setState = async (newState) => {
 
     switch (newState) {
         case '#notes':
-             console.log(tvClient);
-             console.log("What")
-             const response = await tvClient.listDocuments(TV_VAULT_ID);
-             console.log(response)
+             const response = await tvClient.listDocuments(TV_VAULT_ID, true);
              if (response.items.length > 0) {
                  notesListEl.innerHTML = response.items.map(
                      item => `<div class="note">${item.document.note}</div>`
@@ -49,26 +48,23 @@ const setState = async (newState) => {
 
 authFormEl.addEventListener('submit', async e => {
     e.preventDefault();
-    console.log("this");
-    console.log(this);
-    console.log(document.getElementById('username').value);
-    //
-    // tvClient = await TrueVaultClient.login(TV_ACCOUNT_ID, this.username.value, this.password.value);
-    // const response = await tvClient.readCurrentUser();
-    // tvUserId = response.id;
-    // location.hash = '#notes';
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
+
+    tvClient = await TrueVaultClient.login(TV_ACCOUNT_ID, username, password);
+    const response = await tvClient.readCurrentUser();
+    tvUserId = response.id;
+    location.hash = '#notes';
 });
 
 addNoteFormEl.addEventListener('submit', async e => {
     e.preventDefault();
+    let note = document.getElementById('note').value;
+    let doc = {'note': note};
 
-    const document = {'note': this.note.value};
-    console.log(TV_VAULT_ID);
-    console.log(document);
-    console.log(tvUserId);
-    await tvClient.createDocument(TV_VAULT_ID, null, document, tvUserId);
+     await tvClient.createDocument(TV_VAULT_ID, null, doc, tvUserId);
 
-    this.note.value = '';
+    document.getElementById('note').value = '';
     location.hash = '#notes';
 });
 
