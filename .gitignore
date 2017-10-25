@@ -1,3 +1,4 @@
 .DS_Store
 .idea
 tv-config.js
+node_modules

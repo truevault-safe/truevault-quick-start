@@ -1,0 +1,26 @@
+{
+  "name": "truevault-quick-start-check",
+  "version": "1.0.0",
+  "description": "This sample application is a simple notes app that stores data in TrueVault. Learn how to build this app step-by-step by reading the [TrueVault Quick Start Guide](https://www.truevault.com/quick-start-guide.html).",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "build": "webpack --progress --colors --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ed42311/truevault-quick-start-check.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ed42311/truevault-quick-start-check/issues"
+  },
+  "homepage": "https://github.com/ed42311/truevault-quick-start-check#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "path": "^0.12.7",
+    "truevault": "^0.9.0",
+    "webpack": "^3.8.1"
+  }
+}
